@@ -2,8 +2,7 @@
 let stateHeadlineData = [];
 let stateSearchData = [];
 const apiKey = "94104aaf500c492d9d933cde701994b0";
-backendurl1 = "https://stream-curious-cobalt.glitch.me/headline";
-backendurl2 = "https://stream-curious-cobalt.glitch.me/search";
+const backendurl1 = "https://stream-curious-cobalt.glitch.me/headline";
 
 //
 
@@ -191,13 +190,14 @@ const searchFunctionality = function () {
     e.preventDefault();
     searchValue = searchBar.value;
     searchBar.value = "";
-    searchData().then((res) => {
+    const backendurl2 = `https://stream-curious-cobalt.glitch.me/search?search=${searchValue}`;
+    searchData(backendurl2).then((res) => {
       viewSearchData(res);
     });
   });
 };
 
-const searchData = async function () {
+const searchData = async function (backendurl2) {
   const data = await fetch(backendurl2).then((res) => res.json());
   const { articles } = data;
   const stateSearchData = articles.map((article) => {

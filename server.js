@@ -2,15 +2,16 @@ const express = require("express");
 const fetch = require("node-fetch");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require("cors");
 
 const dotenv = require("dotenv");
 dotenv.config();
 
-const apiKey = process.env.API_kEY;
+const apiKey = process.env.API_KEY;
 const headlineurl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${apiKey}`;
 
 // Serve static files from the public directory
-app.use(express.static("public"));
+app.use(cors());
 
 // Proxy endpoint to fetch news
 app.get("/headline", async (req, res) => {
